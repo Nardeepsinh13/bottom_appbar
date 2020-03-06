@@ -1,3 +1,4 @@
+import 'package:bottom_appbar_demo/ActOnBoard.dart';
 import 'package:bottom_appbar_demo/BottomNavigation.dart';
 import 'package:bottom_appbar_demo/TabNavigator.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ActOnBoard()/*MyHomePage(title: 'Flutter Demo Home Page')*/,
     );
   }
 }
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
-        !await _navigatorKeys[currentTab].currentState.maybePop();
+            !await _navigatorKeys[currentTab].currentState.maybePop();
         if (isFirstRouteInCurrentTab) {
           // if not on the 'main' tab
           if (currentTab != TabItem.Product) {
@@ -71,6 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
         return isFirstRouteInCurrentTab;
       },
       child: Scaffold(
+        floatingActionButton:  FloatingActionButton(
+                    mini: true,
+                    onPressed: () {},
+                    child: Icon(Icons.add),
+                  ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.Product),
           _buildOffstageNavigator(TabItem.News),

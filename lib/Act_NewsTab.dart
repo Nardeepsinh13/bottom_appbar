@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class Act_NewsTab extends StatelessWidget {
@@ -16,7 +17,11 @@ class Act_NewsTab extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: Text('News'),
+          child: RaisedButton(
+            onPressed: (){
+            },
+            child: Text('Click Here'),
+          ),
         ),
       ),
     );

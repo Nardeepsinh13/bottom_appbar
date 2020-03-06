@@ -1,3 +1,4 @@
+import 'package:bottom_appbar_demo/main.dart';
 import 'package:flutter/material.dart';
 
 class ActPopularCatDetails extends StatefulWidget {
@@ -6,6 +7,7 @@ class ActPopularCatDetails extends StatefulWidget {
 }
 
 class _ActPopularCatDetailsState extends State<ActPopularCatDetails> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
