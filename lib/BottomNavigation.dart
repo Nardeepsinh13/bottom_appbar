@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum TabItem { Product, News }
+enum TabItem { Product, News, Floating }
 
 Map<TabItem, String> tabName = {
   TabItem.Product: 'Product',

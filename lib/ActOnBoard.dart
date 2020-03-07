@@ -37,7 +37,6 @@ class _ActOnBoardState extends State<ActOnBoard> {
                       if(pageIndex == imgList.length-1){
                         print("finish");
                       }else{
-
                         setState(() {
                           pageIndex++;
                         });

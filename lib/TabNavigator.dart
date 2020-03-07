@@ -1,3 +1,4 @@
+import 'package:bottom_appbar_demo/ActFloatingScreen.dart';
 import 'package:bottom_appbar_demo/ActProductDetail.dart';
 import 'package:bottom_appbar_demo/Act_NewsTab.dart';
 import 'package:bottom_appbar_demo/Act_ProductTab.dart';
@@ -11,6 +12,7 @@ class TabNavigatorRoutes {
 
 class TabNavigator extends StatelessWidget {
   TabNavigator({this.navigatorKey, this.mainContext, this.tabItem});
+
   final GlobalKey<NavigatorState> navigatorKey;
   final BuildContext mainContext;
   final TabItem tabItem;
@@ -29,7 +31,7 @@ class TabNavigator extends StatelessWidget {
       {int materialIndex: 500}) {
     return {
       TabNavigatorRoutes.root: (context) {
-        if(tabItem == TabItem.Product){
+        if (tabItem == TabItem.Product) {
           return Act_ProductTab(
             mainContext: mainContext,
             title: tabName[tabItem],
@@ -37,9 +39,16 @@ class TabNavigator extends StatelessWidget {
                 _push(context, materialIndex: materialIndex),
           );
         }
-        if(tabItem == TabItem.News){
+        if (tabItem == TabItem.News) {
           return Act_NewsTab(
             title: tabName[tabItem],
+            onPush: (materialIndex) =>
+                _push(context, materialIndex: materialIndex),
+          );
+        }
+        if (tabItem == TabItem.Floating) {
+          return ActFloatingScreen(
+            title: 'Floating Tab',
             onPush: (materialIndex) =>
                 _push(context, materialIndex: materialIndex),
           );
@@ -69,13 +78,13 @@ class TabNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var routeBuilders = _routeBuilders(context);
-
+    print("Floating $tabItem");
     return Navigator(
-    key: navigatorKey,
-    initialRoute: TabNavigatorRoutes.root,
-    onGenerateRoute: (routeSettings) {
-      return MaterialPageRoute(
-          builder: (context) => routeBuilders[routeSettings.name](context));
-    });
+        key: navigatorKey,
+        initialRoute: TabNavigatorRoutes.root,
+        onGenerateRoute: (routeSettings) {
+          return MaterialPageRoute(
+              builder: (context) => routeBuilders[routeSettings.name](context));
+        });
   }
 }

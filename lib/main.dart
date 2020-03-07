@@ -1,3 +1,4 @@
+import 'package:bottom_appbar_demo/ActFloatingScreen.dart';
 import 'package:bottom_appbar_demo/ActOnBoard.dart';
 import 'package:bottom_appbar_demo/BottomNavigation.dart';
 import 'package:bottom_appbar_demo/TabNavigator.dart';
@@ -12,18 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: ActOnBoard()/*MyHomePage(title: 'Flutter Demo Home Page')*/,
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -42,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Map<TabItem, GlobalKey<NavigatorState>> _navigatorKeys = {
     TabItem.Product: GlobalKey<NavigatorState>(),
     TabItem.News: GlobalKey<NavigatorState>(),
+    TabItem.Floating: GlobalKey<NavigatorState>(),
   };
 
   void _selectTab(TabItem tabItem) {
@@ -72,15 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
         return isFirstRouteInCurrentTab;
       },
       child: Scaffold(
-        floatingActionButton:  FloatingActionButton(
-                    mini: true,
-                    onPressed: () {},
-                    child: Icon(Icons.add),
-                  ),
+        floatingActionButton: currentTab == TabItem.Floating
+            ? null
+            : FloatingActionButton(
+                mini: true,
+                onPressed: () => _selectTab(TabItem.Floating),
+                child: Icon(Icons.add),
+                heroTag: "demoTag",
+              ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.Product),
           _buildOffstageNavigator(TabItem.News),
+          _buildOffstageNavigator(TabItem.Floating)
         ]),
         bottomNavigationBar: BottomNavigation(
           currentTab: currentTab,
